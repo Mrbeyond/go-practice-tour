@@ -1,10 +1,9 @@
 package main
 
-import (
-	"pract/pdfgen"
-)
+// "pract/pdfgen"
 
 // import compr "pract/compressor"
+import "pract/xflag"
 
 func main() {
 
@@ -12,5 +11,9 @@ func main() {
 	// compr.DecompressText("assets/test.txt")
 	// compr.DoUndoCOmpress(compr.Base64Str)
 	// apicall.TestMedilleryProjectsCount()
-	pdfgen.GeneratePdf()
+	// pdfgen.GeneratePdf()
+	xflag.Xflag()
+
+	xflag.RunFlags()
+
 }
