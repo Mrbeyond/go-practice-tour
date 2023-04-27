@@ -1,11 +1,6 @@
 package main
 
-import "pract/stdin"
-
-// "pract/pdfgen"
-
-// import compr "pract/compressor"
-// import "pract/xflag"
+import "pract/remotebase"
 
 func main() {
 
@@ -13,9 +8,9 @@ func main() {
 	// compr.DecompressText("assets/test.txt")
 	// compr.DoUndoCOmpress(compr.Base64Str)
 	// apicall.TestMedilleryProjectsCount()
-	// pdfgen.GeneratePdf()
+	// pdfgclearen.GeneratePdf()
 	// xflag.Xflag()
 	// xflag.RunFlags()
-	stdin.Simulator()
-
+	// stdin.Simulator()
+	remotebase.Run()
 }
