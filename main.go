@@ -1,6 +1,6 @@
 package main
 
-import "pract/remotebase"
+import "pract/scrap"
 
 func main() {
 
@@ -12,5 +12,6 @@ func main() {
 	// xflag.Xflag()
 	// xflag.RunFlags()
 	// stdin.Simulator()
-	remotebase.Run()
+	// remotebase.Run()
+	scrap.Run()
 }
