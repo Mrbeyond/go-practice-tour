@@ -1,6 +1,10 @@
 package main
 
-import "pract/scrap"
+import "pract/advent"
+
+// import "pract/stdin"
+
+// import "pract/scrap"
 
 func main() {
 
@@ -13,5 +17,8 @@ func main() {
 	// xflag.RunFlags()
 	// stdin.Simulator()
 	// remotebase.Run()
-	scrap.Run()
+	// scrap.Run()
+
+	// advent.RunOne()
+	advent.RunTwo()
 }
