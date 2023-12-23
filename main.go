@@ -1,6 +1,13 @@
 package main
 
-import "pract/advent"
+import (
+	"fmt"
+	"pract/files"
+	"sync"
+	"time"
+)
+
+// import "pract/advent"
 
 // import "pract/stdin"
 
@@ -21,20 +28,28 @@ func main() {
 
 	// advent.RunOne()
 	// advent.RunTwo()
-	advent.RunFour()
+	// advent.RunFour()
 
-	// start := time.Now()
-	// ch := make(chan string)
-	// go files.RunCurrent(".", ch)
+	start := time.Now()
+	ch := make(chan string)
+	wg := sync.WaitGroup{}
+	wg.Add(1)
 
-	// for {
-	// 	log, valid := <-ch
-	// 	if valid {
-	// 		fmt.Println("\n\n", log, "\n\n ")
-	// 	} else {
-	// 		break
-	// 	}
-	// }
+	go files.RunCurrent("/home/beyond/Desktop", ch, &wg)
 
-	// fmt.Println(time.Since(start))
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
+
+	for {
+		log, valid := <-ch
+		if valid {
+			fmt.Println("\n\n", log, "\n\n ")
+		} else {
+			break
+		}
+	}
+
+	fmt.Println(time.Since(start))
 }

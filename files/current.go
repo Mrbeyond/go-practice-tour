@@ -3,6 +3,7 @@ package files
 import (
 	"fmt"
 	"os"
+	"sync"
 )
 
 func panicError(err error) {
@@ -13,8 +14,8 @@ func panicError(err error) {
 
 var read = 0
 
-func RunCurrent(path string, ch chan<- string) {
-	defer close(ch)
+func RunCurrent(path string, ch chan<- string, wg *sync.WaitGroup) {
+	defer wg.Done()
 	entries, err := os.ReadDir(path)
 	fmt.Println(len(entries), "\t files", "\t\t path -> \t", path, "\n\n ")
 	if os.IsPermission(err) {
@@ -27,7 +28,8 @@ func RunCurrent(path string, ch chan<- string) {
 		// fmt.Println("", file.Name(), file.IsDir(), "\n\n ")
 
 		if file.IsDir() {
-			go RunCurrent(path+"/"+file.Name(), ch)
+			wg.Add(1)
+			go RunCurrent(path+"/"+file.Name(), ch, wg)
 		} else {
 			read++
 			stat, err := os.Stat(path + "/" + file.Name())
