@@ -24,7 +24,6 @@ func useRegex() (sum int, err error) {
 			break
 		}
 		matches := rg.FindAllString(str, -1)
-		fmt.Println("\n", matches, " matches \n ")
 		firstDigit, lastDigit := "", ""
 		switch len(matches) {
 		case 0:

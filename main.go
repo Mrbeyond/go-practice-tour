@@ -20,5 +20,21 @@ func main() {
 	// scrap.Run()
 
 	// advent.RunOne()
-	advent.RunTwo()
+	// advent.RunTwo()
+	advent.RunFour()
+
+	// start := time.Now()
+	// ch := make(chan string)
+	// go files.RunCurrent(".", ch)
+
+	// for {
+	// 	log, valid := <-ch
+	// 	if valid {
+	// 		fmt.Println("\n\n", log, "\n\n ")
+	// 	} else {
+	// 		break
+	// 	}
+	// }
+
+	// fmt.Println(time.Since(start))
 }

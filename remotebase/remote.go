@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"runtime"
@@ -98,7 +97,7 @@ func Run() {
 	if allocAfter-allocBefore > 10000 {
 		log.Fatal("Too much memory allocated, maximum 10000 bytes needed")
 	} else {
-		b, err := ioutil.ReadFile(filename)
+		b, err := os.ReadFile(filename)
 		if err == nil {
 			log.Fatal(string(b))
 		} else {
