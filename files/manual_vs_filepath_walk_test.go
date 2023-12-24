@@ -1,7 +1,6 @@
-package test
+package files
 
 import (
-	"pract/files"
 	"sync"
 	"testing"
 )
@@ -12,8 +11,7 @@ func BenchmarkFilepathWalDir(b *testing.B) {
 		ch := make(chan int)
 		wg := sync.WaitGroup{}
 		wg.Add(1)
-		go files.CountFiles(".", ch, &wg)
-		// go files.CountFiles("/home/beyond/Desktop", ch, &wg)
+		go CountFiles(".", ch, &wg)
 		go func() {
 			wg.Wait()
 			close(ch)
@@ -31,8 +29,7 @@ func BenchmarkManualRead(b *testing.B) {
 		ch := make(chan int)
 		wg := sync.WaitGroup{}
 		wg.Add(1)
-		go files.RunCurrent(".", ch, &wg)
-		// go files.RunCurrent("/home/beyond/Desktop", ch, &wg)
+		go RunCurrent(".", ch, &wg)
 		go func() {
 			wg.Wait()
 			close(ch)
