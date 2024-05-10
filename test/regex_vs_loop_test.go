@@ -3,7 +3,6 @@ package test
 import (
 	"bufio"
 	"flag"
-	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -17,7 +16,12 @@ var count = 0
 func useRegex(str string) (sum int, err error) {
 	flag.Parse()
 	count = 0
-	rr := strings.NewReader(*inputFlag)
+	var rr *strings.Reader
+	if *inputFlag != "" {
+		rr = strings.NewReader(*inputFlag)
+	} else {
+		rr = strings.NewReader(str)
+	}
 	rg := regexp.MustCompile(`\d`)
 	scanner := bufio.NewScanner(rr)
 
@@ -51,24 +55,30 @@ func useRegex(str string) (sum int, err error) {
 }
 
 func useLoop(str string) (sum int) {
-	rr := strings.NewReader(*inputFlag)
+	var rr *strings.Reader
+	if *inputFlag != "" {
+		rr = strings.NewReader(*inputFlag)
+	} else {
+		rr = strings.NewReader(str)
+	}
 	scanner := bufio.NewScanner(rr)
 
 	for {
 		scanner.Scan()
 		str := scanner.Text()
-		if len(str) == 0 {
+		size := len(str)
+		if size == 0 {
 			break
 		}
 		start, end := "", ""
-		for i := 0; i < len(str); i++ {
+		for i := 0; i < size; i++ {
 			if unicode.IsDigit(rune(str[i])) {
 				start = string(str[i])
 				break
 			}
 		}
 
-		for i := len(str) - 1; i >= 0; i-- {
+		for i := size - 1; i >= 0; i-- {
 			if unicode.IsDigit(rune(str[i])) {
 				end = string(str[i])
 				break
@@ -86,14 +96,14 @@ func useLoop(str string) (sum int) {
 
 const str = "abweqjkjqw qwjejdic123def456xyz789kokok jkwekdoqwkdowkdoqwk"
 
-func BenchmarkRegexVsLoop(b *testing.B) {
+func BenchmarkLoopForRegexVsLoop(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		useLoop(str)
 	}
 }
 
-func BenchmarkLoopVsRegex(b *testing.B) {
-	fmt.Println(count)
+func BenchmarkRegexForLoopVsRegex(b *testing.B) {
+	// fmt.Println(count)
 	for i := 0; i < b.N; i++ {
 		useRegex(str)
 	}
